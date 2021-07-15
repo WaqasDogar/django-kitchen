@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Royal Kitchen</title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+<!--
+
+Template 2076 Royal Kitchen
+
+http://www.tooplate.com/view/2076-Royal Kitchen
+
+<!===============================================================================================-->
+
+<link rel="stylesheet" href="{% static 'Myapp/css/bootstrap.min.css'%}">
+	<link rel="stylesheet" href="{% static 'Myapp/css/animate.min.css'%}">
+	<link rel="stylesheet" href="{% static 'Myapp/css/font-awesome.min.css'%}">
+	<link rel="stylesheet" href="{% static 'Myapp/css/nivo-lightbox.css'%}">
+	<link rel="stylesheet" href="{% static 'Myapp/css/nivo_themes/default/default.css'%}">
+	<link rel="stylesheet" href="{% static 'Myapp/css/style.css'%}">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{% static 'Myapp/css/utilup.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'Myapp/css/mainup.css'%}">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body style="background-color: rgb(185, 235, 255);">
+  <!-- divider -->
+  <div class="row">
+    <div class="span12">
+      <div class="solidline"></div>
+    </div>
+  </div>
+
+  <div class="row" >
+
+    <div class="span12">
+      {% load cart_tag %}
+
+      <div class="container" style="background-color: powderblue; border-radius: 5%;">
+        <h2><strong>Cart detail</strong> -Manage your cart detail from here</h2>
+        <p>Cart Customer : {{ request.user }} <br> No of Items in CART : {{request.session.cart|length}} <br> Sub Total : {{ total }}</p>
+        <table class="table" >
+          <thead>
+            <tr class="danger" >
+              <th style="border-radius: 30%;">
+                #
+              </th>
+              <th style="border-radius: 15%;">
+                Name
+              </th>
+              <th style="border-radius: 10%;">
+                Picture
+              </th>
+              <th style="border-radius: 15%;"> 
+                Price
+              </th>
+              <th style="border-radius: 15%;">
+                Quantity
+              </th>
+              <th style="border-radius: 15%;">
+                Total
+              </th>
+              <th style="border-radius: 20%;">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>     
+            {% for key,value in request.session.cart.items %}
+            <tr class="success">
+              <td style="border-radius: 30%; text-align: center;">{{forloop.counter}}</td>
+              <td style="border-radius: 30%; text-align: center;">{{value.name}}</td>
+              <td><img src="{{value.image}}" height="200" width="200" style="border-radius: 10%;" ></td>
+              <td>{{value.price}}</td>
+              <td>
+                <span>
+
+                  <a href="{% url 'item_increment' value.product_id %}" class="btn btn-info"> + </a>
+
+                  <p style="margin-left: 9%;">{{value.quantity}}</p>
+
+                  {% if value.quantity > 1 %}
+
+                  <a href="{% url 'item_decrement' value.product_id %}" class="btn btn-info"> -  </a> 
+
+                  {% else %}
+
+                  <a href="#" onclick="return confirm('Decrement Not Allowed')" class="btn btn-info"> -  </a> 
+
+                  {% endif %}
+
+                </span>
+              </td>
+              <td>{{ value.price|multiply:value.quantity }}</td>
+
+              
+              <td>
+
+                <a href="{% url 'deletecartitem' value.product_id %}" class="btn " onclick="return confirm('Are you sure?')">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+                
+              </td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+
+       <!-- storing data in database from cart --> 
+         <div class="wrap-login100-form-btn" style="width: 20%; float: right; margin-right: 7%;">
+          <div class="login100-form-bgbtn"></div>
+          <a href="{% url 'store' %}" class="login100-form-btn" style="margin-left: 7%;">
+            Checkout
+          </a>
+        </div>
+
+
+        <div class="wrap-login100-form-btn" style="width: 20%; float: left; margin-left: 7%;">
+          <div class="login100-form-bgbtn"></div>
+          <a href="{% url 'cart_clear' %}" class="login100-form-btn">
+            Clear Cart
+          </a>
+        </div>
+        <!---------------------------------------->
+
+    </div>
+  </div>
+</div>
+</body>
