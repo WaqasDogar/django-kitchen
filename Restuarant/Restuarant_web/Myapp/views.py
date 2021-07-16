@@ -282,25 +282,25 @@ def approve(request,id,name):
     # till now-------------------------------------------------------------------
 
     #sending messege to phone number ----------------------------------------------------------
-    account_sid = 'AC4af29e2af5cb0aebcacd7163e51bd13f' 
-    auth_token = 'f8dcd99015b62e6c13e7d033a9c4f002' 
+    account_sid = 'put your own' 
+    auth_token = 'put your own' 
     client = Client(account_sid, auth_token) 
  
     message = client.messages.create(  
-                              messaging_service_sid='MG87b83b4c2f466fce234192413429ca2a', 
+                              messaging_service_sid='put your own', 
                               body='Order#'+id+' Approved <- Royal Kitchen''S.'+'Dear '+ name +' your Order is Approved and will be delivered soon in less than 45 minutes. Order Details'+odrfood+' Thanks for choosing us--Royal KitchenS Community.',      
                               to=phonenumber
                           ) 
                           
     message = client.messages.create( 
-                              from_='whatsapp:+14155238886',  
+                              from_='put your own',  
                               body='Order#'+id+' Approved <- Royal Kitchen''S.'+'Dear '+ name +' your Order is Approved and will be delivered soon in less than 45 minutes. Order Details'+odrfood+' Thanks for choosing us--Royal KitchenS Community.',      
                               to='whatsapp:'+phonenumber
                           ) 
     #till yha tk-------------------------------------------------------------------------------
 
     #by using useremail sending email to the user 
-    sender = 'mozaua15@gmail.com'
+    sender = 'put your own'
     receivers = [useremail]
     body_of_email = 'Dear '+ name +' your Order is Approved and will be delivered soon in less than 45 minutes. Order Details'+odrfood+' Thanks for choosing us.'
     msg = MIMEText(body_of_email, 'html')
@@ -308,7 +308,7 @@ def approve(request,id,name):
     msg['From'] = sender
     msg['To'] = ','.join(receivers)
     s = smtplib.SMTP_SSL(host = 'smtp.gmail.com', port = 465)
-    s.login(user = 'mozaua15@gmail.com', password = 'Mozaua_15?')
+    s.login(user = 'put your own', password = 'put your own')
     s.sendmail(sender, receivers, msg.as_string())
     s.quit()
     print("Email has been sent sucessfully!")
@@ -333,26 +333,26 @@ def reject(request,id,name):
     # till now-------------------------------------------------------------------
 
     #sending messege to phone number ----------------------------------------------------------
-    account_sid = 'AC4af29e2af5cb0aebcacd7163e51bd13f' 
-    auth_token = 'f8dcd99015b62e6c13e7d033a9c4f002' 
+    account_sid = 'put your own' 
+    auth_token = 'put your own' 
     client = Client(account_sid, auth_token) 
 
     #to phone number
     message = client.messages.create(  
-                              messaging_service_sid='MG87b83b4c2f466fce234192413429ca2a', 
+                              messaging_service_sid='put your own', 
                               body='Order#'+id+'Order Rejected -> Royal Kitchen''S'+'Dear '+ name +' your Order is Rejected for further details contact us at Royal Kitchen Sahiwal branch.',      
                               to=phonenumber
                           ) 
     #to whatsapp
     message = client.messages.create( 
-                              from_='whatsapp:+14155238886',  
+                              from_='put your own',  
                               body='Order#'+id+'Order Rejected -> Royal Kitchen''S'+'Dear '+ name +' your Order is Rejected for further details contact us at Royal Kitchen Sahiwal branch.',      
                               to='whatsapp:'+phonenumber
                           ) 
     #till yha tk-------------------------------------------------------------------------------
     
     #by using useremail sending email to the user 
-    sender = 'mozaua15@gmail.com'
+    sender = 'put your own'
     receivers = [useremail]
     body_of_email = 'Your Order is Rejected for further details contact us at Royal Kitchen Sahiwal branch.'
     msg = MIMEText(body_of_email, 'html')
@@ -360,7 +360,7 @@ def reject(request,id,name):
     msg['From'] = sender
     msg['To'] = ','.join(receivers)
     s = smtplib.SMTP_SSL(host = 'smtp.gmail.com', port = 465)
-    s.login(user = 'mozaua15@gmail.com', password = 'Mozaua_15?')
+    s.login(user = 'put your own', password = 'put your own')
     s.sendmail(sender, receivers, msg.as_string())
     s.quit()
     print("Email has been sent sucessfully!")
